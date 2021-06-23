@@ -16,14 +16,34 @@ class TodoList extends React.Component {
     this.setState({ todoList: clone });
   };
 
+  handleDelete = (index) => {
+    const clone = [...this.state.todoList];
+
+    // const index = clone.indexOf(currentListItem);
+    clone.splice(index, 1);
+
+    this.setState({ todoList: clone });
+  };
+
   render() {
     return (
       <div>
         <ul className="list-group">
           {this.state.todoList.map((todoElement, index) => {
             return (
-              <li key={index} className="list-group-item">
+              <li
+                key={index}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
                 {todoElement}
+                <button
+                  className="btn"
+                  onClick={() => {
+                    this.handleDelete(index);
+                  }}
+                >
+                  <i className="fas fa-times"></i>
+                </button>
               </li>
             );
           })}
